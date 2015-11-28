@@ -1,0 +1,321 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD DOS"}}\\
+{\large  \textbf{PR\'ACTICA 07 - AN\'ALISIS ESTAD\'ISTICO DE DATOS UNIVARIADOS DISCRETOS CON R.}}\\[3 cm]
+{\large Alumna:}\\
+{\large Martha Yoana Medina S\'anchez}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{UNIDAD DOS}
+\chead{PRACTICA 07}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\begin{center}
+\subsubsection*{\textbf{Pr\'actica 07-An\'alisis estad\'istico de datos univariados discretos con R.}}
+\end{center}
+
+\begin{center}
+\subsection*{\textbf{AN\'ALISIS ESTAD\'ISTICO DE LOS DATOS.}}
+\end{center}
+
+\begin{enumerate}
+  \item 
+
+<<>>=
+# Activar el directorio de trabajo 
+
+getwd() 
+setwd("C:/Users/User/Documents/PRACTICAS_YOANA_MEDINA/Yoana/PRACTICAS DE R") 
+@
+
+\item 
+<<>>=
+# Crear un nuevo Script y llamarle "Script07-DatosDiscretos"
+@
+
+\item 
+<<>>=
+# Crear el vector de datos.
+
+Hijos <- c(2, 1) 
+data.entry(Hijos) 
+Hijos 
+length(Hijos) 
+@
+
+\item
+<<>>=
+# Guardar el vector de datos en un archivo de texto. 
+
+write(Hijos, "Hijos.txt") 
+@
+
+\item
+<<>>=
+# Limpiar el área de trabajo (Workspace)
+
+ls() 
+rm(list=ls(all=TRUE)); ls() 
+@
+
+\item
+<<>>=
+# Leer o recuperar el vector de datos o archivo de texto 
+
+X <- scan("Hijos.txt", what = integer(0), na.strings = "NA", flush=FALSE) 
+ls() 
+@
+<<>>=
+# Si el vector contiene caracteres se usa: 
+
+what = character()
+@
+<<>>=
+# Si el vector contiene reales se ocupa: 
+
+ what = double(0)
+@
+
+\item Elaborar el gr\'afico de puntos y diagrama de tallo-hojas (stem-and-leaf)
+
+<<>>=
+# Grafico de puntos
+
+stripchart(X, method="stack", vertical=FALSE, col="blue", pch=1, 
+main="Grafico de\n puntos", xlab="Numero de hijos") 
+@
+
+\textbf{Observaci\'on: method puede ser:} 
+
+\textbf{"overplot" (los puntos coincidentes son superpuestos)}\\
+\textbf{"jitter" (los puntos se ven como alejados o inquietos)}\\
+\textbf{"stack" (los puntos coincidentes son apilados, uno tras otro)}\\
+
+<<>>=
+# Gráfico de puntos
+
+stripchart(X, overplot="stack", vertical=FALSE, col="blue", pch=1, main="Gráfico de\n 
+puntos", xlab="Número de hijos") 
+@
+<<>>=
+# Gráfico de puntos 
+
+stripchart(X, jitter="stack", vertical=FALSE, col="blue", pch=1, main="Gráfico de\n 
+puntos", xlab="Número de hijos") 
+@
+<<>>=
+# Gráfico de puntos 
+
+stripchart(X, stack="stack", vertical=FALSE, col="blue", pch=1, main="Gráfico de\n 
+puntos", xlab="Número de hijos") 
+@
+
+\item 
+<<>>=
+# Crear la tabla de frecuencias completa 
+
+# frecuencias individuales
+
+fab <- table(X); fab # frecuencias absolutas 
+fre <- fab/length(X); fre # frecuencias relativas 
+Fac <- cumsum(fab); Fac # frecuencias acumuladas 
+Far <- Fac/length(X); Far # frecuencias acumuladas relativas 
+@
+<<>>=
+# tabla de frecuencias completa
+
+options(digits=2) 
+tabla <- data.frame(fab=fab, fre=fre, Fac=Fac, Far=Far) 
+names(tabla) <- c("X", "fab", "free.X", "fre", "Fac", "Far") 
+tabla 
+tfre <- data.frame(X=tabla$X, fab=tabla$fab, fre=tabla$fre, Fac=tabla$Fac, 
+                   Far=tabla$Far) 
+tfre 
+@
+<<>>=
+# Note que el cuadro resultante no tiene la presentacion deseada para 
+# presentarla en un informe. Sin embargo, si estamos utilizando LATEX podemos 
+# utilizar la siguiente instruccion xtable(tfre) y con esto nos genera el
+# codigo correspondiente para incorporarlo en nuestro archivo. 
+@
+
+\item
+<<>>=
+ # Calcular los estadisticos descriptivos de la variable
+
+# Estadisticos de tendencia central de los datos 
+
+media <- mean(X, na.rm = FALSE); media 
+
+# na.rm = FALSE, le indica a R que los datos faltantes son omitidos en el  
+# calculo de la media. 
+@
+<<>>=
+for(i in 1:length(X)) if (fab[i] == max(fab)) break() 
+moda <- names(fab[i]); moda
+
+# R no tiene incorporada una funcion para la moda
+
+mediana <- median(X); mediana
+@
+<<>>=
+# Estadísticos de dispersión o variabilidad de los datos 
+
+range(X)
+
+# Devuelve el valor minimo y maximo del conjunto de datos. 
+@
+<<>>=
+cuasivar <- var(X); cuasivar 
+s <- sd(X); s 
+
+# Devuelve la cuasivarianza y la cuasivarianza muestral 
+@
+<<>>=
+quantile(X,c(0.25, 0.5, 0.75))
+
+# Calculo de Q1, Q2, Q3 
+@
+<<>>=
+quantile(X, 0.6) 
+
+# En general se pueden encontrar cualquier percentil 
+@
+<<>>=
+# Conocer un resumen de los datos 
+
+resumen <- summary(X); resumen
+
+# Min, Q1, Median, Mean, Q3, Max 
+@
+<<>>=
+fivenum(X) 
+
+# min, cuartil menor, mediana, cuartil mayor, max 
+@
+
+\item Elaborar los gr\'aficos que se le pueden aplicar a la variable discreta
+
+<<>>=
+# Grafico de barras (por ser pocos valores) 
+
+barplot(tfre[[2]], main="Gráfico de barras", xlab="X = Número Hijos\n", 
+        ylab="frecuencia", col=c("yellow", "blue", "white", "orange", 
+                                 "cyan", "red"), sub="Agosto-2012") 
+@
+
+<<>>=
+# Grafico de pastel (por ser pocos valores)
+
+pie(tfre[[2]], main="Gráfico de pastel", xlab="Número Hijos \n", 
+    col=c("orange", "blue", "white", "yellow", "cyan", "blue"), 
+    sub="Agosto-2012") 
+@
+
+<<>>=
+# Se puede especificar nombres para las categorias 
+
+names(fab) = c("Cero", "Uno")
+
+pie(fab, main="Gráfico de pastel", xlab="X = Número Hijos\n", 
+    col=c("yellow", "blue", "white", "orange", "cyan", "red"), 
+    sub="Agosto-2012")
+@
+
+<<>>=
+# Gráfico de cajas (box-plot) es la representación gráfica de los cinco 
+# numeros Horizontal
+
+boxplot(X, main="Gráfico de caja", ylab="Número de hijos\n")
+@
+
+<<>>=
+# Vertical 
+
+boxplot(X, main="Gráfico de caja", xlab=" Número de hijos\n", plot=TRUE, 
+        border="red", col="yellow", horizontal=TRUE) 
+@
+
+<<>>=
+# NOTE QUE TODOS LOS GRAFICOS DE BARRAS Y DE PASTEL SON REALIZADOS 
+# APARTIR DE UNA TABLA DE FRECUENCIA, LA CUAL SE INDICA EN tfre[[2]]. 
+# TAMBIEN SE PUDO UTILIZAR tabla[[2]]. 
+@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+
+
+\end{document}

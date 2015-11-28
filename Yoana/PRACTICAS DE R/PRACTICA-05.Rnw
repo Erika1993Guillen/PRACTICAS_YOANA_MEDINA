@@ -1,0 +1,340 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD UNO"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Martha Yoana Medina S\'anchez}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{UNIDAD UNO}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\begin{center}
+\textbf{UNIDAD 1: Pr\'actica 05-Estructuras de control y definici\'on de funci\'on en R.}
+\end{center}
+
+R es un lenguaje de expresiones, en el sentido de que el \'unico tipo de orden que posee es una funci\'on o expresi\'on que devuelve un resultado. Incluso una asignaci\'on es una expresi\'on, cuyo resultado es el valor asignado y que puede utilizarse en cualquier sitio en que pueda utilizarse una expresi\'on.\\
+
+Las \'ordenes pueden agruparse entre llaves, \{expr\_1;. . .; expr\_m\}, en cuyo caso el valor del grupo es el resultado de la \'ultima expresi\'on del grupo que se haya evaluado. Puesto que un grupo es por s\'i mismo una expresi\'on, puede incluirse entre par\'entesis y ser utilizado como parte de una expresi\'on mayor. Este proceso puede repetirse si se considera necesario.\\
+
+Las estructuras de control en R son muy similares a las de cualquier lenguaje de programaci\'on.\\
+
+\begin{center}
+\textbf{1.  ESTRUCTURA CONDICIONAL: LA ORDEN IF() Y IFELSE().}
+\end{center}
+
+La construcci\'on condicional if(), la cual es la m\'as f\'acil de utilizar tiene alguna de las siguientes formas:\\
+
+\begin{itemize}
+\item if(condicion) expr 
+\item if(condicion) expresion1 else expresion2 
+\end{itemize}
+
+Donde \textbf{condiciones} una expresi\'on que debe producir un valor l\'ogico, y si \'este es verdadero, TRUE \'o T, se eval\'ua expresion1, si es falso, FALSO \'o F, y se ha escrito la opci\'on else, que es opcional, se ejecutar\'a expresion2.\\
+
+Si la expresion1 \'o expresion2 son complejas, esto es, tienen m\'as de un comando entonces deben encerrarse entre llaves \{\…\}\\
+
+A menudo suelen utilizarse los operadores \&\& (AND) y || (OR) en una condicion. En tanto que \& y |se aplican a todos los elementos de un vector, \&\& y || se aplican a vectores de longitud uno y s\'olo eval\'uan el segundo argumento si es necesario, esto es, si el valor de la condicion completa no se deduce del primer argumento.\\
+
+ifelse(prueba, si, no)\\
+
+Donde: 
+\begin{itemize}
+\item prueba: Es un vector l\'ogico o condici\'on l\'ogica a ser evaluada.
+\item si: devuelve valores para los elementos ciertos de \textbf{prueba}.
+\item no: devuelve valores para los elementos falsos de \textbf{prueba}.
+\end{itemize}
+
+El uso de if() est\'a limitado a expresiones que no sean vectores. Si estamos evaluando vectores o matrices entonces lo indicado es hacerlo con ifelse() que devuelve un valor con la misma forma que el argumento \textbf{prueba} el cual es llenado con elementos seleccionados bien sea del argumento \textbf{si} o del argumento \textbf{no} dependiendo de si el elemento de \textbf{prueba} es \textbf{TRUE} o \textbf{FALSE}, si los argumentos \textbf{si} o \textbf{no} son muy cortos, entonces sus elementos son reciclados.\\
+
+Por ejemplo, ejecute las siguientes instrucciones
+<<>>=
+x <- c(6:-4); 
+x
+sqrt(x) # Produce un mensaje de advertencia
+sqrt(ifelse(x >= 0, x, NA)) # No produce advertencia
+ifelse(x >= 0, sqrt(x), NA) # Produce un mensaje de advertencia
+# Comente las diferencias entre cada una de las instrucciones anteriores.
+
+@
+\begin{center}
+\textbf{2. ESTRUCTURAS ITERATIVAS O DE REPETICI\'ON: FOR(), WHILE() Y REPEAT()}
+\end{center}
+
+La funci\'on for() es una construcci\'on repetitiva que tiene la forma:\\
+\begin{center}
+\textbf{for(nombre in expr1) expr2}\\
+\end{center}
+Donde \textbf{nombre} es la variable de control del n\'umero de iteraciones, expr1 es un vector (a menudo de la forma m:n), y expr2 es una expresi\'on, a menudo agrupada, en cuyas sub-expresiones puede aparecer la variable de control, expr2 se eval\'ua repetidamente conforme nombre recorre los valores del vector expr1. 
+
+
+\begin{itemize}
+\item Ejemplo:
+\end {itemize}
+<<>>=
+x <- c(2, 6, 4, 7, 5, 1)
+suma<-0; for(i in 1:3) suma = suma+x[i]; suma
+@
+
+Nota: En R, la funci\'on for() se utiliza mucho menos que en lenguajes tradicionales, ya que no aprovecha las estructuras de los objetos. El c\'odigo que trabaja directamente con las estructuras completas suele ser m\'as claro y m\'as r\'apido.\\
+
+Otras estructuras de repetici\'on son:
+
+\begin{itemize}
+\item while (condici\'on) expresi\'on
+\item repeat expresi\'on 
+\end{itemize}
+
+La funci\'on break() se utiliza para terminar cualquier ciclo. Esta es la \'unica forma (salvo que se produzca un error) de finalizar un ciclo repea. La funci\'on next() deja de ejecutar el resto de un ciclo y pasa a ejecutar el siguiente.\\
+
+\begin{center}
+\textbf{FUNCIONES ESCRITAS POR EL USUARIO}
+\end{center}
+
+El lenguaje R permite al usuario definir objetos que sean funciones. \'Estas se convierten en aut\'enticas funciones de R, que se almacenan en una forma interna y se pueden utilizar en expresiones futuras.\\
+
+Los argumentos pueden ser objetos (datos, f\'ormulas, expresiones, . . . ), algunos de los cuales pueden ser definidos por defecto en la funci\'on; sin embargo, estos argumentos pueden ser modificados por el usuario con opciones. Una funci\'on en R puede carecer totalmente de argumentos, ya sea porque todos est\'an definidos por defecto (y sus valores son modificados con opciones), o porque la funci\'on realmente no utiliza argumentos.\\
+
+Una funci\'on se define por una asignaci\'on de la forma
+\begin{center}
+ nombreFunci\'on $<-$ function(arg1, arg2, . . .) expresi\'on\\
+ return(valor) 
+\end{center}
+
+Donde: arg1, arg2, . . . : son los argumentos de la funci\'o u opciones del tipo opcion=expresi\'on, una puede no tener argumentos.\\
+
+\textbf{Expresi\'on:} es una expresi\'on en R, si ocupa m\'as de una instrucci\'on estas van encerradas entre llaves {}, y utiliza los argumentos para calcular su valor. El valor de la expresi\'on es devuelto como el valor de la funci\'on por medio del nombre, o puede utilizar return() para retornar uno o m\'as valores.\\ 
+
+\textbf{valor:} es una expresi\'on o una serie de expresiones separadas por comas.\\
+
+\begin {itemize}
+\item Ejemplo 1: Definir en R la funci\'on cuadr\'atica y = f (x) = (3x^2) - (5x) + 2
+\end {itemize}
+
+Como nombre de la funci\'on podemos usar cualquier palabra (que no sea una palabra reservada por R, como log o sum) que puede incluir letras y puntos.\\
+
+Llam\'emosle func.cuadratica y defin\'amos la de la manera siguiente: 
+<<>>=
+func.cuadratica <- function(x)
+{
+3*x^2-5*x+2
+}
+#Luego, si queremos calcular f(2) simplemente ejecutamos la instruccion: 
+y <- func.cuadratica(2);y
+@
+
+\textbf{NOTA: Toda funci\'on para usarla debe estar cargada en el \'area de trabajo (Workspace). Es decir, primero es necesario correr el c\'odigo necesario el c\'odigo de la funci\'on y asegurarse que no contenga errores de sintaxis.}\\ 
+
+
+\begin{itemize}
+\item Ejemplo 2: Se quiere definir una funci\'on para calcular la media de un vector de datos
+\end {itemize}
+Una definici\'on podr\'ia ser:
+<<>>=
+media <- function(x)
+{
+
+  n = length(x)
+suma <- 0.0
+for(i in 1:n) suma = suma + x[i]
+media = suma/n
+
+}
+save(media, file= "media.RData")
+rm(list=ls(all=TRUE))
+load("media.RData")
+
+x <- 1:5;
+(media(x)) # Se usa doble parentesis para que muestre el resultado en pantalla
+
+y <- c(5, NA , 4, 9);
+(media(y)) # El resultado no puede calcularse pues falta un dato
+
+z <- c(5, 1 , 4, 9);
+(media(z))
+
+(media) # Nos muestra el codigo de la funcion
+@
+
+Note que al escribir (media), nos muestra el c\'odigo de la funci\'on.\\
+
+Observe el problema que se da en el c\'alculo de la media, debido a los datos omitidos o perdidos, qu\'e propone usted para solucionar esto.\\ 
+
+\begin{itemize}
+\item Ejemplo 3: Se quiere definir una funci\'on para graficar la funci\'on seno de x
+\end {itemize}
+Una definici\'on de esta funci\'on puede ser:
+<<>>=
+Seno <- function(x)
+{
+
+  y = sin(x)
+plot(x, y, main="Ejemplo de gr\'aficos en R",
+xlab="x", ylab="y = Seno(x)", col="blue", pch=1)
+
+}
+# Pruebe la funcion con el siguiente vector:
+
+x<-seq(-pi, pi, len=100)
+
+Seno(x)
+@
+\newpage
+\begin{center}
+\textbf {EJERCICIOS}
+\end{center}
+\begin{itemize}
+\item Ejercicio 1: Escriba una funci\'on para encontrar el factorial de un n\'umero mayor que cero
+\end{itemize}
+<<>>=
+fac<-function(f){ prod<-1 # Inicializar el producto en 1
+if (f==0){ # Cuando el valor ingresado es cero
+  prod<-1 # El factorial es 1
+  return(prod) 
+}
+  else{
+    if(f<0) # Cuando el valor ingresado es negativo
+      print("No existe el factorial de un n?mero negativo")
+    else {
+      int<-c(1:f) # Cuando el valor es positivo
+      
+      for(i in int)
+        prod<-prod * i  
+      return(prod)
+    }
+  }
+  
+  }
+fac(4)
+
+@
+\begin{itemize}
+\item Ejercicio 2: Escriba una funci\'on para encontrar la varianza o la cuasi-varianza de un vector de
+datos.
+\end{itemize}
+<<>>=
+vx<-function(k) { suma <- 0.0
+  z<-length(k)
+  for(i in 1:z){
+    suma = suma + k[i]
+    media = suma/z # Obtener la media aritmetica del vector
+    for(i in 1:z){
+      vx<-k[i]-media
+      vx<-(vx)/z
+    }
+  } 
+  return(vx) 
+}
+k <- c(2,3,4)
+(vx(k))
+@
+\begin{itemize}
+\item Ejercicio 3: Escriba una funci\'on para encontrar la media geom\'otrica de un vector de datos
+\end{itemize}
+<<>>=
+# Obtener la ra\'iz n-esima de cualquier valor 
+raiz=function(m,n){ # Este es la funcion que llamamos en los dos c\'odigos siguientes
+  raiz=n^(1/m)
+  return(raiz)
+}
+raiz(3,27)
+# Caso cuando el vector esta ordenado, es decir desde 1 hasta el valor deseado
+MG<-function(m)
+  {prod<-1 # Este c?digo se parece al del factorial de un numero positivo
+  int<-c(1:m)
+
+  for(i in int)
+    prod<-prod * i  
+  raiz=raiz(m,prod) 
+  # Obtener la ra\'iz n-esima (corresponde a la cantidad de valores en el vector)
+  return(raiz)
+  }
+MG(5) 
+
+# Caso cuando el vector es de calquier forma que el usuario desee
+MG2<-function(g) {product<-1 # Inicializar el producto
+  p<- length(g) # Guardar la longitud del vector
+  for(i in 1:p)
+    product<-product * g[i] # Realizar el producto de cada valor del vector
+  MG2<-product # Guardar el producto en MG2
+  raiz<-raiz(length(g),MG2) 
+  # Obtener la raiz n-esima (corresponde a la cantidad de valores en el vector)
+  return(raiz)
+}
+g<-c(2,3,4,5) # Pasar el vector de datos
+(MG2(g))
+
+@
+\newpage
+\begin{itemize}
+\item Ejercicio 4: Escriba una funci\'on para encontrar la media arm\'onica de un vector de datos
+\end{itemize}
+<<>>=
+MA <- function(x)
+  {suma <- 0.0 # Inicializar suma
+  n <- length(x) # Guardar la longitud del vector
+  for(i in 1:n) 
+    suma <- suma + (1/x[i]) 
+  # Realizar la suma, pero de los reciprocos (1/x[i]) de los valores del vector
+  denom <- suma/n # Encontrar la media de los reciprocos
+  MA<-1/denom
+  
+}
+x <- c(2,3) 
+# Pasar el vector de datos
+(MA(x))
+@
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,957 @@
+\documentclass[12pt,letterpaper]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD UNO"}}\\
+{\large  \textbf{PR\'ACTICA 04 - Tipos de objetos: factores, listas y hojas de datos, operadores y funciones que operan sobre ellos.}\\[3 cm]
+{\large Alumna:}\\
+{\large Martha Yoana Medina S\'anchez}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{UNIDAD UNO}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\begin{center}
+\textbf{Práctica 03 - Tipos de objetos: factores, listas y hojas de datos, operadores y funciones que operan sobre ellos.}
+\end{center}
+
+\begin{center}
+\textbf{1.  FACTORES NOMINALES Y ORDINALES.}
+\end{center}
+
+\textbf{FACTORES NOMINALES.}\\
+
+Ejemplo 1: Variables sexo (categ\'orica) y edad en una muestra de 7 alumnos del curso. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Supongamos que se obtuvieron los siguientes datos: }
+\hlstd{sexo} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"M"}\hlstd{,} \hlstr{"F"}\hlstd{,} \hlstr{"F"}\hlstd{,} \hlstr{"M"}\hlstd{,} \hlstr{"F"}\hlstd{,} \hlstr{"F"}\hlstd{,} \hlstr{"M"}\hlstd{); sexo}
+\end{alltt}
+\begin{verbatim}
+## [1] "M" "F" "F" "M" "F" "F" "M"
+\end{verbatim}
+\begin{alltt}
+\hlstd{edad} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{19}\hlstd{,} \hlnum{20}\hlstd{,} \hlnum{19}\hlstd{,} \hlnum{22}\hlstd{,} \hlnum{20}\hlstd{,} \hlnum{21}\hlstd{,} \hlnum{19}\hlstd{); edad}
+\end{alltt}
+\begin{verbatim}
+## [1] 19 20 19 22 20 21 19
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Podemos construir un factor con los niveles o categorias de sexo }
+\hlstd{FactorSexo} \hlkwb{=} \hlkwd{factor}\hlstd{(sexo); FactorSexo}
+\end{alltt}
+\begin{verbatim}
+## [1] M F F M F F M
+## Levels: F M
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Se pueden ver los niveles o categoríasdel factor con: }
+\hlkwd{levels}\hlstd{(FactorSexo)}
+\end{alltt}
+\begin{verbatim}
+## [1] "F" "M"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Crear una tabla que contenga la media muestralpor categoría de sexo }
+\hlcom{#(nivel del factor):}
+
+\hlstd{mediaEdad} \hlkwb{<-} \hlkwd{tapply}\hlstd{(edad, FactorSexo, mean); mediaEdad}
+\end{alltt}
+\begin{verbatim}
+##  F  M 
+## 20 20
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Note que el primer argumento debe ser un vector, que es del cual se }
+\hlcom{#encontrarán las medidas de resumen; el segundo es el factor que se est\textbackslash{}'a}
+\hlcom{#considerando, mientras que en el tercero se especifica la medida de}
+\hlcom{# inter\textbackslash{}'es, solamente puede hacerse una medida a la vez. }
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\¿Qu\'e tipo de objeto es la variable mediaEdad?: 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{is.vector}\hlstd{(mediaEdad);}
+\end{alltt}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.matrix}\hlstd{(mediaEdad);}
+\end{alltt}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.list}\hlstd{(mediaEdad);}
+\end{alltt}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.table}\hlstd{(mediaEdad);}
+\end{alltt}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.array}\hlstd{(mediaEdad)}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\textbf{FACTORES ORDINALES}
+\end{center}
+
+Los niveles de los factores se almacenan en orden alfab\'etico, o en el orden en que se especificaron en la funci\'on factor() si ello se hizo expl\'icitamente. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{factor}\hlstd{(}\hlnum{2}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2
+## Levels: 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+A veces existe una ordenacion natural en los niveles de un factor, orden que deseamos tener en cuenta en los analisis estadísticos. La funci\'on ordered() crea este tipo de factores y su uso es id\'entico al de la funci\'on factor(). Los factores creados por la funci\'on factor() los denominaremos nominales o simplemente factores cuando no haya lugar a confusi\'on, y los creados por la funci\'on ordered() los denominaremos ordinales. En la mayor\'ia de los casos la \'unica diferencia entre ambos tipos de factores consiste en que los ordinales se imprimenindicando el orden de los niveles. Sin embargo, los contrastes generados por los dos tipos de factores al ajustar Modelos lineales, son diferentes. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ordered}\hlstd{(}\hlnum{2}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2
+## Levels: 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\textbf{2.  CREACI\'ON Y MANEJO DE LISTAS.}
+\end{center}
+
+Ejemplo 1: Crear una Lista con cuatro componentes. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1}\hlkwb{<-}\hlkwd{list}\hlstd{(}\hlkwc{padre}\hlstd{=}\hlstr{"Pedro"}\hlstd{,} \hlkwc{madre}\hlstd{=}\hlstr{"María"}\hlstd{,} \hlkwc{no.hijos}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{edad.hijos}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{4}\hlstd{,}\hlnum{7}\hlstd{,}\hlnum{9}\hlstd{))}
+\hlstd{lista1}
+\end{alltt}
+\begin{verbatim}
+## $padre
+## [1] "Pedro"
+## 
+## $madre
+## [1] "María"
+## 
+## $no.hijos
+## [1] 3
+## 
+## $edad.hijos
+## [1] 4 7 9
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+#Revise algunos tipos como:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{is.matrix}\hlstd{(lista1);} \hlkwd{is.vector}\hlstd{(lista1}\hlopt{$}\hlstd{edad.hijos)}
+\end{alltt}
+\begin{verbatim}
+## [1] FALSE
+## [1] TRUE
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Ejemplo 2: Acceso a las componentes de una lista: 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1[}\hlnum{1}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## $padre
+## [1] "Pedro"
+\end{verbatim}
+\begin{alltt}
+\hlcom{#accede a la componente como una lista (con etiqueta y valor)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1[}\hlstr{"padre"}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## $padre
+## [1] "Pedro"
+\end{verbatim}
+\begin{alltt}
+\hlcom{#el acceso es igual que con lista1[1] }
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1[[}\hlnum{2}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+## [1] "María"
+\end{verbatim}
+\begin{alltt}
+\hlcom{#accede al valor o valores de la componente segunda pero no muestra el nombre de}
+\hlcom{#la componente.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1[}\hlstr{"madre"}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## $madre
+## [1] "María"
+\end{verbatim}
+\begin{alltt}
+\hlcom{#el acceso es igual que con lista1[[1]]}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Ejemplo 3: Acceso a los elementos de la cuarta componente:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1[[}\hlnum{4}\hlstd{]][}\hlnum{2}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## [1] 7
+\end{verbatim}
+\begin{alltt}
+\hlcom{#Se indica el elemento a ingresar en el segundo corchete.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Ejemplo 4: Acceso de las componentes de una lista por su nombre:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+ \hlstd{lista1}\hlopt{$}\hlstr{"padre"}
+\end{alltt}
+\begin{verbatim}
+## [1] "Pedro"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+#similar a 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1[}\hlstr{"padre"}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## $padre
+## [1] "Pedro"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Forma general:\\ 
+
+Por ejemplo:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1}\hlopt{$}\hlstd{padre}
+\end{alltt}
+\begin{verbatim}
+## [1] "Pedro"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+equivale a
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1[[}\hlnum{1}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+## [1] "Pedro"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+y
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1}\hlopt{$}\hlstd{edad.hijos[}\hlnum{2}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## [1] 7
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+equivale a 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1[[}\hlnum{4}\hlstd{]][}\hlnum{2}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## [1] 7
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Ejemplo 5: Utilizar el nombre de la componente como \'indice:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1[[}\hlstr{"madre"}\hlstd{]]}
+\end{alltt}
+\begin{verbatim}
+## [1] "María"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+#se puede ver que equivale a
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1}\hlopt{$}\hlstd{padre}
+\end{alltt}
+\begin{verbatim}
+## [1] "Pedro"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+#Tambi\'en es \'util la forma:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{<-} \hlstr{"madre"}\hlstd{; lista1[x]}
+\end{alltt}
+\begin{verbatim}
+## $madre
+## [1] "María"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Ejemplo 6: Creaci\'on de una sublista de una lista existente:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{subLista} \hlkwb{<-} \hlstd{lista1[}\hlnum{4}\hlstd{]; subLista}
+\end{alltt}
+\begin{verbatim}
+## $edad.hijos
+## [1] 4 7 9
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Ejemplo 7: Ampliaci\'on de una lista: por ejemplo,la lista lista1 tiene 4\\
+componentes y se le puede agreg\'ar una quinta componente con:\\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1[}\hlnum{5}\hlstd{]} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{sexo.hijos}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"F"}\hlstd{,} \hlstr{"M"}\hlstd{,} \hlstr{"F"}\hlstd{)); lista1}
+\end{alltt}
+\begin{verbatim}
+## $padre
+## [1] "Pedro"
+## 
+## $madre
+## [1] "María"
+## 
+## $no.hijos
+## [1] 3
+## 
+## $edad.hijos
+## [1] 4 7 9
+## 
+## [[5]]
+## [1] "F" "M" "F"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Observe que no aparece el nombre del objeto agregado, pero usted puede modificar la estructura de la lista lista1 con:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1} \hlkwb{<-} \hlkwd{edit}\hlstd{(lista1)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lista1[}\hlnum{5}\hlstd{]} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwc{sexo.hijos}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"F"}\hlstd{,} \hlstr{"M"}\hlstd{,} \hlstr{"F"}\hlstd{)); lista1}
+\end{alltt}
+\begin{verbatim}
+## $padre
+## [1] "Pedro"
+## 
+## $madre
+## [1] "María"
+## 
+## $no.hijos
+## [1] 3
+## 
+## $edad.hijos
+## [1] 4 7 9
+## 
+## [[5]]
+## [1] "F" "M" "F"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\textbf{Nota: Se puede aplicar la funcion data.entry() para modificar la estructura de una lista.}\\
+
+Ejemplo 8: Funciones que devuelven una lista.\\
+
+Las funciones y expresiones de R devuelven un objeto como resultado, por tanto, si deben devolver varios objetos, previsiblemente de diferentes tipos, la forma usual es una lista con nombres. Por ejemplo, la funci\'on eigen() que calcula los autovalores y autovectores de una matriz sim\'etrica.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{eigen}\hlstd{(}\hlnum{40}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## $values
+## [1] 40
+## 
+## $vectors
+##      [,1]
+## [1,]    1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Ejecute las siguientes instrucciones: 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{S} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlopt{-}\hlkwd{sqrt}\hlstd{(}\hlnum{2}\hlstd{),} \hlopt{-}\hlkwd{sqrt}\hlstd{(}\hlnum{2}\hlstd{),} \hlnum{2}\hlstd{),} \hlkwc{nrow}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{2}\hlstd{); S}
+\end{alltt}
+\begin{verbatim}
+##           [,1]      [,2]
+## [1,]  3.000000 -1.414214
+## [2,] -1.414214  2.000000
+\end{verbatim}
+\begin{alltt}
+\hlstd{autovS} \hlkwb{<-} \hlkwd{eigen}\hlstd{(S); autovS}
+\end{alltt}
+\begin{verbatim}
+## $values
+## [1] 4 1
+## 
+## $vectors
+##            [,1]       [,2]
+## [1,] -0.8164966 -0.5773503
+## [2,]  0.5773503 -0.8164966
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Observe que la funci\'on eigen() retorna una listade dos componentes, donde la
+componente
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{autovS}\hlopt{$}\hlstd{values}
+\end{alltt}
+\begin{verbatim}
+## [1] 4 1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+es el vector de autovalores de S y la componente es la matriz de los 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{autovS}\hlopt{$}\hlstd{vectors}
+\end{alltt}
+\begin{verbatim}
+##            [,1]       [,2]
+## [1,] -0.8164966 -0.5773503
+## [2,]  0.5773503 -0.8164966
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+correspondientes autovectores. Si quisi\'eramos almacenar s\'olo los autovalores
+de podemos hacer lo siguiente: 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{evals} \hlkwb{<-} \hlkwd{eigen}\hlstd{(S)}\hlopt{$}\hlstd{values; evals}
+\end{alltt}
+\begin{verbatim}
+## [1] 4 1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Ejemplo 9: Crear una matriz dando nombres a las filas y columnas
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Notas} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{5}\hlstd{,} \hlnum{7}\hlstd{,} \hlnum{6}\hlstd{,} \hlnum{8}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{9}\hlstd{,} \hlnum{10}\hlstd{),} \hlkwc{ncol}\hlstd{=}\hlnum{3}\hlstd{,}
+\hlkwc{dimnames}\hlstd{=}\hlkwd{list}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"Matematica"}\hlstd{,}\hlstr{"Algebra"}\hlstd{,}\hlstr{"Geometria"}\hlstd{),}
+\hlkwd{c}\hlstd{(}\hlstr{"Juan"}\hlstd{,}\hlstr{"Jose"}\hlstd{,}\hlstr{"Rene"}\hlstd{))); Notas}
+\end{alltt}
+\begin{verbatim}
+##            Juan Jose Rene
+## Matematica    2    6    4
+## Algebra       5    8    9
+## Geometria     7    2   10
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Los nombres se dan primero para filas y luego para columnas.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\textbf{3.  CREACI\'ON Y MANEJO DE HOJAS DE DATOS (DATA FRAME).}
+\end{center}
+
+Una hoja de datos (data frame) es una lista que pertenece a la clase data.frame.
+Un data.frame puede considerarse como una matriz de datos. Hay restricciones en
+las listas que pueden pertenecer a esta clase, en particular: 
+
+\begin{itemize}
+\item Los componentes deben ser vectores (num\'ericos, cadenas de caracteres, o  l\'ogico), factores, matrices num\'ericas, listas u otras hojas de datos.
+\item Las matrices, listas, y hojas de datos contribuyen a la nueva hoja de datos con tantas variables como columnas, elementos o variables posean, respectivamente.
+\item Los vectores num\'ericos y los factores se incluyensin modificar, los vectores no num\'ericos se fuerzan a factores cuyos niveles son los \'unicos valores que aparecen en el vector.
+\item Los vectores que constituyen la hoja de datos deben tener todos la misma longitud, y las matrices deben tener el mismo tama\~no de filas.
+\end{itemize}
+
+Las hojas de datos pueden interpretarse, en muchos sentidos, como matrices cuyas columnas pueden tener diferentes modos y atributos. Pueden imprimirse en forma matricial y se pueden extraer sus filas o columnas mediante la indexaci\'on de matrices. En una hoja de datos cada columna corresponde a una variable y cada fila a un elemento del conjunto de observaciones.\\
+
+Ejemplo 1: Creaci\'on de un data frame teniendo como columnas tres vectores:\\
+
+\textbf{En primer lugar generamos los tres vectores}\\
+
+El primer vector tendr\'a 20 elementos que se obtienen con reemplazamiento de una muestra aleatoria de valores l\'ogicos.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{log} \hlkwb{<-} \hlkwd{sample}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{TRUE}\hlstd{,} \hlnum{FALSE}\hlstd{),} \hlkwc{size} \hlstd{=} \hlnum{20}\hlstd{,} \hlkwc{replace} \hlstd{= T); log}
+\end{alltt}
+\begin{verbatim}
+##  [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE
+## [12] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Note que puede usar T en lugar de TRUE y F en lugar de FALSE. }
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+El segundo vector tendr\'a 20 elementos de valores complejos cuya parte real proviene de una distribuci\'on Normal est\'andar y cuya parte imaginaria lo hace de una distribuci\'on Uniforme(0,1)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{comp} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{20}\hlstd{)} \hlopt{+} \hlkwd{runif}\hlstd{(}\hlnum{20}\hlstd{)} \hlopt{*} \hlstd{(}\hlnum{1i}\hlstd{); comp}
+\end{alltt}
+\begin{verbatim}
+##  [1] -0.14646577+0.08602472i -0.49315296+0.39256123i
+##  [3] -0.45711283+0.21474079i  0.01118341+0.00234721i
+##  [5] -0.01360499+0.70554925i  1.42583452+0.41799001i
+##  [7]  1.54526212+0.00612870i  0.57298932+0.52174051i
+##  [9]  0.73874428+0.38451797i  0.32380908+0.26170476i
+## [11] -1.15990067+0.73390303i -0.00305110+0.80111276i
+## [13]  0.96176829+0.42166940i -0.91011780+0.70710369i
+## [15] -0.44582832+0.02997066i -0.08552133+0.97838082i
+## [17] -1.28736386+0.83852832i -1.45393129+0.91108970i
+## [19]  1.13572004+0.70300821i -0.65704756+0.96429258i
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+El tercer vector tendr\'a 20 elementos de una distribuci\'on Normal est\'andar 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{num} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{20}\hlstd{,} \hlkwc{mean}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlnum{1}\hlstd{); num}
+\end{alltt}
+\begin{verbatim}
+##  [1] -1.6705491 -0.7156814 -1.6308463 -1.5793473 -0.3577839 -1.0083848
+##  [7] -1.0913554 -0.4321839  0.3024515 -1.5660311  1.5683403  0.7640646
+## [13]  0.7087179 -1.0062888 -1.3028994 -0.8865125 -0.4955508  2.0495382
+## [19]  1.2085524 -1.0397227
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\textbf{Crear un data frame compuesto por los tres vectores anteriores}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{df1} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(log, comp, num); df1}
+\end{alltt}
+\begin{verbatim}
+##      log                    comp        num
+## 1  FALSE -0.14646577+0.08602472i -1.6705491
+## 2   TRUE -0.49315296+0.39256123i -0.7156814
+## 3   TRUE -0.45711283+0.21474079i -1.6308463
+## 4   TRUE  0.01118341+0.00234721i -1.5793473
+## 5  FALSE -0.01360499+0.70554925i -0.3577839
+## 6   TRUE  1.42583452+0.41799001i -1.0083848
+## 7  FALSE  1.54526212+0.00612870i -1.0913554
+## 8  FALSE  0.57298932+0.52174051i -0.4321839
+## 9   TRUE  0.73874428+0.38451797i  0.3024515
+## 10  TRUE  0.32380908+0.26170476i -1.5660311
+## 11  TRUE -1.15990067+0.73390303i  1.5683403
+## 12 FALSE -0.00305110+0.80111276i  0.7640646
+## 13 FALSE  0.96176829+0.42166940i  0.7087179
+## 14  TRUE -0.91011780+0.70710369i -1.0062888
+## 15 FALSE -0.44582832+0.02997066i -1.3028994
+## 16 FALSE -0.08552133+0.97838082i -0.8865125
+## 17 FALSE -1.28736386+0.83852832i -0.4955508
+## 18 FALSE -1.45393129+0.91108970i  2.0495382
+## 19  TRUE  1.13572004+0.70300821i  1.2085524
+## 20  TRUE -0.65704756+0.96429258i -1.0397227
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\textbf{Crear un vector de nombres de los tres vectores anteriores}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{nombres} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"logico"}\hlstd{,} \hlstr{"complejo"}\hlstd{,} \hlstr{"numerico"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\textbf{Define los nombres de las columnas del data frame asign\'andoles el vector nombres}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{names}\hlstd{(df1)} \hlkwb{<-} \hlstd{nombres; df1}
+\end{alltt}
+\begin{verbatim}
+##    logico                complejo   numerico
+## 1   FALSE -0.14646577+0.08602472i -1.6705491
+## 2    TRUE -0.49315296+0.39256123i -0.7156814
+## 3    TRUE -0.45711283+0.21474079i -1.6308463
+## 4    TRUE  0.01118341+0.00234721i -1.5793473
+## 5   FALSE -0.01360499+0.70554925i -0.3577839
+## 6    TRUE  1.42583452+0.41799001i -1.0083848
+## 7   FALSE  1.54526212+0.00612870i -1.0913554
+## 8   FALSE  0.57298932+0.52174051i -0.4321839
+## 9    TRUE  0.73874428+0.38451797i  0.3024515
+## 10   TRUE  0.32380908+0.26170476i -1.5660311
+## 11   TRUE -1.15990067+0.73390303i  1.5683403
+## 12  FALSE -0.00305110+0.80111276i  0.7640646
+## 13  FALSE  0.96176829+0.42166940i  0.7087179
+## 14   TRUE -0.91011780+0.70710369i -1.0062888
+## 15  FALSE -0.44582832+0.02997066i -1.3028994
+## 16  FALSE -0.08552133+0.97838082i -0.8865125
+## 17  FALSE -1.28736386+0.83852832i -0.4955508
+## 18  FALSE -1.45393129+0.91108970i  2.0495382
+## 19   TRUE  1.13572004+0.70300821i  1.2085524
+## 20   TRUE -0.65704756+0.96429258i -1.0397227
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\textbf{Define los nombres de las filas del data frame asign\'andoles un vector de 20 elementos correspondientes a las 20 primeras letras del abecedario}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{row.names}\hlstd{(df1)} \hlkwb{<-} \hlstd{letters[}\hlnum{1}\hlopt{:}\hlnum{20}\hlstd{]; df1}
+\end{alltt}
+\begin{verbatim}
+##   logico                complejo   numerico
+## a  FALSE -0.14646577+0.08602472i -1.6705491
+## b   TRUE -0.49315296+0.39256123i -0.7156814
+## c   TRUE -0.45711283+0.21474079i -1.6308463
+## d   TRUE  0.01118341+0.00234721i -1.5793473
+## e  FALSE -0.01360499+0.70554925i -0.3577839
+## f   TRUE  1.42583452+0.41799001i -1.0083848
+## g  FALSE  1.54526212+0.00612870i -1.0913554
+## h  FALSE  0.57298932+0.52174051i -0.4321839
+## i   TRUE  0.73874428+0.38451797i  0.3024515
+## j   TRUE  0.32380908+0.26170476i -1.5660311
+## k   TRUE -1.15990067+0.73390303i  1.5683403
+## l  FALSE -0.00305110+0.80111276i  0.7640646
+## m  FALSE  0.96176829+0.42166940i  0.7087179
+## n   TRUE -0.91011780+0.70710369i -1.0062888
+## o  FALSE -0.44582832+0.02997066i -1.3028994
+## p  FALSE -0.08552133+0.97838082i -0.8865125
+## q  FALSE -1.28736386+0.83852832i -0.4955508
+## r  FALSE -1.45393129+0.91108970i  2.0495382
+## s   TRUE  1.13572004+0.70300821i  1.2085524
+## t   TRUE -0.65704756+0.96429258i -1.0397227
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Ejemplo 2: Vamos a crear la siguiente hoja de datos que tiene 4 variables o columnas: 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{edad} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{18}\hlstd{,} \hlnum{21}\hlstd{,} \hlnum{45}\hlstd{,} \hlnum{54}\hlstd{); edad}
+\end{alltt}
+\begin{verbatim}
+## [1] 18 21 45 54
+\end{verbatim}
+\begin{alltt}
+\hlstd{datos} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{150}\hlstd{,} \hlnum{160}\hlstd{,} \hlnum{180}\hlstd{,} \hlnum{205}\hlstd{,} \hlnum{65}\hlstd{,} \hlnum{68}\hlstd{,} \hlnum{65}\hlstd{,} \hlnum{69}\hlstd{),} \hlkwc{ncol}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{dimnames}\hlstd{=}\hlkwd{list}\hlstd{(}\hlkwd{c}\hlstd{(),} \hlkwd{c}\hlstd{(}\hlstr{"Estatura"}\hlstd{,}\hlstr{"Peso"}\hlstd{))); datos}
+\end{alltt}
+\begin{verbatim}
+##      Estatura Peso
+## [1,]      150   65
+## [2,]      160   68
+## [3,]      180   65
+## [4,]      205   69
+\end{verbatim}
+\begin{alltt}
+\hlstd{sexo} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"F"}\hlstd{,} \hlstr{"M"}\hlstd{,} \hlstr{"M"}\hlstd{,} \hlstr{"M"}\hlstd{); sexo}
+\end{alltt}
+\begin{verbatim}
+## [1] "F" "M" "M" "M"
+\end{verbatim}
+\begin{alltt}
+\hlstd{hoja1} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{Edad}\hlstd{=edad, datos,} \hlkwc{Sexo}\hlstd{=sexo); hoja1}
+\end{alltt}
+\begin{verbatim}
+##   Edad Estatura Peso Sexo
+## 1   18      150   65    F
+## 2   21      160   68    M
+## 3   45      180   65    M
+## 4   54      205   69    M
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Para editar o agregar datos, o componentes utilice:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{fix}\hlstd{(hoja1)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\textbf{Nota: Puede forzar que una lista, cuyos componentes cumplan las restricciones para ser una hoja de datos, realmente lo sea, mediante la funci\'on as.data.frame()}\\
+
+\begin{center}
+\textbf{ACCESO A LAS COMPONENTE O VARIABLES DE UNA HOJA DE DATOS.}
+\end{center}
+
+Normalmente para acceder a la componente o variable Edad de la hoja de datos se utilizar\'a la expresion
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{hoja1}\hlopt{$}\hlstd{Edad}
+\end{alltt}
+\begin{verbatim}
+## [1] 18 21 45 54
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+, pero existe una forma m\'as sencilla, consiste en conectar la hoja de datos para que se pueda hacer referencia a sus componentes directamente por su nombre.\\
+
+\textbf{Conexi\'o de listas o hojas de datos.}\\
+
+La funci\'on search() busca y presenta qu\'e hojas de datos, listas o bibliotecas han sido conectadas o desconectadas. Teclee search()
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{search}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+##  [1] ".GlobalEnv"        "package:knitr"     "package:stats"    
+##  [4] "package:graphics"  "package:grDevices" "package:utils"    
+##  [7] "package:datasets"  "package:methods"   "Autoloads"        
+## [10] "package:base"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+La funci\'on attach() es la funci\'on que permite conectar en la trayectoria de b\'usqueda no s\'olo directorios, listas y hojas de datos, sino tambi\'en otros tipos de objetos. Teclee attach(hoja1) y luego search().\\
+
+
+Luego puede acceder a las componentes por su nombre: 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{hoja1}\hlopt{$}\hlstd{Edad}
+\end{alltt}
+\begin{verbatim}
+## [1] 18 21 45 54
+\end{verbatim}
+\begin{alltt}
+\hlstd{hoja1}\hlopt{$}\hlstd{Peso}
+\end{alltt}
+\begin{verbatim}
+## [1] 65 68 65 69
+\end{verbatim}
+\begin{alltt}
+\hlstd{hoja1}\hlopt{$}\hlstd{peso}\hlopt{+}\hlnum{1}\hlstd{;hoja1}
+\end{alltt}
+\begin{verbatim}
+## numeric(0)
+##   Edad Estatura Peso Sexo
+## 1   18      150   65    F
+## 2   21      160   68    M
+## 3   45      180   65    M
+## 4   54      205   69    M
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Posteriormente podr\'a desconectar el objeto utilizando la funci\'on detach(), utilizando como argumento el n\'umero de posici\'on o, preferiblemente, su nombre. Teclee detach(hoja1) y compruebe que la hoja de datos ha sido eliminada de la trayectoria de b\'usqueda con search().\\
+
+Pruebe su puede acceder a una componente sólo con su nombre, por ejemplo,
+
+
+\begin{center}
+\textbf{TRABAJO CON HOJAS DE DATOS}
+\end{center}
+
+Una metodolog\'ia de trabajo para tratar diferentes problemas utilizando el mismo directorio de trabajo es la siguiente:\\
+
+\begin{itemize}
+\item Re\'una todas las variables de un mismo problema en una hoja de datos y d\'e le un nombre apropiado e informativo;
+\item Para analizar un problema, conecte, mediante attach(), la hoja de datos correspondiente (en la posici\'on 2) y utilice el directorio de trabajo (en la posici\'on 1) para los c\'alculos y variables temporales; 
+\item Antes de terminar un an\'alisis, a\~nada las variables que deba conservar a la hoja de datos utilizando la forma \$ para la asignaci\'on y desconecte la hoja de datos mediante detach();
+\item Para finalizar, elimine del directorio de trabajo las variables que no desee conservar, para mantenerlo lo m\'as limpio posible. 
+\end{itemize}
+
+De este modo podr\'a analizar diferentes problemas utilizando el mismo directorio, aunque todos ellos compartan variables denominadas x, y o z, por ejemplo. 
+\end{document}

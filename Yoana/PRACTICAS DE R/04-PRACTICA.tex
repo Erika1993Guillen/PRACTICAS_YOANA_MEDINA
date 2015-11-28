@@ -1,0 +1,173 @@
+\documentclass[12pt,letterpaper]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definción}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estad\'istico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD UNO"}}\\
+{\large  \textbf{PR\'ACTICA 04 - Tipos de objetos, operadores y funciones que operan sobre ellos: Vectores, matrices y arreglos (matrices indexadas). .}}\\[3 cm]
+{\large Alumna:}\\
+{\large Martha Yoana Medina Sanch\'ez}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici?n}[section]
+
+\lhead{Pr\'actica 04}
+
+\lfoot{LICENCIATURA EN ESTAD\'iSTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\section{IMPORTACI\'ON Y EXPORTACI\'ON DE DATOS EN R}
+
+Generalmente los datos suelen leerse desde archivos externos y no teclearse desde la consola. Las
+capacidades de lectura de archivos de R son sencillas y sus requisitos son bastante estrictos, por lo
+que hay que tenerlas muy en cuenta, de lo contrario los resultados en la lectura no ser\'an los
+esperados.
+\subsection{USO DE LA FUNCI\'ON READ.TABLE()}
+\begin{itemize}
+\item Ejemplo: Guardar (escribir) determinados datos en un archivo de texto (ASCII) y luego recuperar
+(leer) dicho archivo desde R.
+\end{itemize}
+\begin{itemize}
+\item {1) } Cambiar el directorio de trabajo a su directorio de trabajo, en el cual ha almacenado sus
+pr\'acticas, desde el men\'u File.\\
+\item {2) } Abrir el R Editor para crear un nuevo script desde el men\'u File.\\
+\item {3) } En la ventana del R Editor, teclee los datos tal como se muestra:\\
+\end{itemize}
+Observaciones:
+\begin{itemize}
+\item La primera l\'inea del archivo debe contener el nombre de cada objeto o variable.
+\item En cada una de las siguientes l\'ineas, el primer elemento es la etiqueta de la fila, y a
+continuaci\'on deben aparecer los valores de cada variable.
+\item Si el archivo tiene un elemento menos en la primera l\'inea que en las restantes,
+obligatoriamente ser\'a el dise\~no anterior el que se utilice.
+\item A menudo no se dispone de etiquetas de filas. En ese caso, tambi\'en es posible la lectura y el programa a\~nadir\'i unas etiquetas predeterminadas.
+\item La \'ultima l\'inea debe finalizar con ENTER para que R reconozca el fin del archivo.
+\end{itemize}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Entrada1} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"datos01.txt"}\hlstd{,} \hlkwc{header}\hlstd{=T);Entrada1}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in read.table("{}datos01.txt"{}, header = T): incomplete final line found by readTableHeader on 'datos01.txt'}}\begin{verbatim}
+##   EDAD ESTATURA PESO SEXO
+## 1   26     1.65  146    F
+## 2   21     1.73  158    M
+## 3   21     1.81  167    M
+## 4   20     1.70  152    F
+\end{verbatim}
+\begin{alltt}
+\hlstd{Entrada2} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"datos01.dat"}\hlstd{,} \hlkwc{header}\hlstd{=T);Entrada2}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in file(file, "{}rt"{}): no fue posible abrir el archivo 'datos01.dat': No such file or directory}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in file(file, "{}rt"{}): no se puede abrir la conexión}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): objeto 'Entrada2' no encontrado}}\begin{alltt}
+\hlcom{# No existe diferencia entre ambos archivos a la hora de leerlos }
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+
+
+
+
+
+\end{document}

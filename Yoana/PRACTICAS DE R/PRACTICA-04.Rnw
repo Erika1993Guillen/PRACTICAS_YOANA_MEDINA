@@ -1,0 +1,90 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Defincin}
+
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM?TICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad?stica}\\[1.25cm]
+{\large Control Estad?stico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD UNO"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr?z Guill?n Pineda}\\[2cm]
+{\large Fecha de elaboraci?n}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici?n}[section]
+
+\lhead{Pr?ctica 04}
+
+\lfoot{LICENCIATURA EN ESTAD?STICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\section{IMPORTACI?N Y EXPORTACI?N DE DATOS EN R}
+
+Generalmente los datos suelen leerse desde archivos externos y no teclearse desde la consola. Las
+capacidades de lectura de archivos de R son sencillas y sus requisitos son bastante estrictos, por lo
+que hay que tenerlas muy en cuenta, de lo contrario los resultados en la lectura no ser?n los
+esperados.
+\subsection{USO DE LA FUNCI?N READ.TABLE()}
+\begin{itemize}
+\item Ejemplo: Guardar (escribir) determinados datos en un archivo de texto (ASCII) y luego recuperar
+(leer) dicho archivo desde R.
+\end{itemize}
+\begin{itemize}
+\item {1?) } Cambiar el directorio de trabajo a su directorio de trabajo, en el cual ha almacenado sus
+pr?cticas, desde el men? File.\\
+\item {2?) } Abrir el R Editor para crear un nuevo script desde el men? File.\\
+\item {3?) } En la ventana del R Editor, teclee los datos tal como se muestra:\\
+\end{itemize}
+Observaciones:
+\begin{itemize}
+\item La primera l?nea del archivo debe contener el nombre de cada objeto o variable.
+\item En cada una de las siguientes l?neas, el primer elemento es la etiqueta de la fila, y a
+continuaci?n deben aparecer los valores de cada variable.
+\item Si el archivo tiene un elemento menos en la primera l?nea que en las restantes,
+obligatoriamente ser? el dise?o anterior el que se utilice.
+\item A menudo no se dispone de etiquetas de filas. En ese caso, tambi?n es posible la lectura y el
+programa a?adir? unas etiquetas predeterminadas.
+\item La ?ltima l?nea debe finalizar con ENTER para que R reconozca el fin del archivo.
+\end{itemize}
+
+
+\end{document}

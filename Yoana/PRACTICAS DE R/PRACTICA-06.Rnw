@@ -1,0 +1,200 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD DOS"}}\\
+{\large  \textbf{PR\'ACTICA 06 - AN\'ALISIS DE DATOS CATEG\'ORICOS.}}\\[3 cm]
+{\large Alumna:}\\
+{\large Martha Yoana Medina S\'anchez}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{UNIDAD DOS}
+\chead{PRACTICA 06}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\begin{center}
+\textbf{Pr\'actica 06 - An\'alisis de datos categ\'oricos.}
+\end{center}
+
+\begin{center}
+\textbf{ESCALAS DE MEDICI\'ON}\\
+\end{center}
+
+Como la estad\'istica analiza los datos y \'estos son producto de las mediciones, necesitamos estudiar las escalas de medici\'on. Este tema es de suma importancia, pues el tipo de escala de medici\'on utilizado para reunir los datos ayuda a determinar el tipo de an\'alisis a utilizar en los datos. Existen cuatro clases de escalas que aparecen de manera com\'un en las ciencias: nominal, ordinal, de intervalo y de raz\'on. Ellas difieren en el n\'umero de atributos matem\'aticos que poseen.\\
+
+
+Los tipos de datos univariados que vamos a analizar en esta pr\'actica son:\\
+
+\textbf{Categ\'oricos.}Tienen la caracter\'istica de que todos los miembros de una categor\'ia se consideran iguales en lo que se refiere a ese tipo. Este tipode datos se subdivide en nominales y ordinales.
+
+\begin{itemize}
+  \item \textbf{Nominales.}Los valores que pueden asumir sirven para clasificarlos pero no para ordenarlos. En caso de usarse n\'umeros, s\'olose adoptan como nombres o identificaciones.
+  \item \textbf{Ordinales.}Los valores que puede asumir este tipo de datos son categor\'ias que conllevan un juicio de valor que exige comparar a los diferentes elementos de la muestra con respecto a este tipo con el objeto de establecer un orden. Es decir, que los datos se organizan a trav\'es de las relaciones de igualdad, mayor o menor. 
+\end{itemize}
+\begin{center}
+  \textbf{1. AN\'ALISIS ESTAD\'ISTICO DE DATOS CATEG\'ORICOS.}
+\end{center}
+
+Ejemplo: Se realiza un estudio para conocer las preferencias sobre el tipo de gaseosa que se consume: \textbf{CC$=$Coca Cola, PC$=$Pepsi Cola, SC$=$Salva Cola}, para ello se toma una muestra aleatoria de 20 personas.\\
+
+\begin{enumerate}
+  \item  Activar el directorio de trabajo.
+
+<<>>=
+getwd() 
+@
+<<>>=
+setwd("C:/Users/User/Documents/PRACTICAS_YOANA_MEDINA/Yoana/PRACTICAS DE R") 
+@
+
+\item  Crear un nuevo script y llamarle Script06-DatosCategoricos.
+
+\item Crear un vector con el tipo de gaseosa y otro con la muestra generada aleatoriamente:
+<<>>=
+Tipo <- c("CC", "PC", "SC"); Tipo 
+# crea un vector en las que contiene los tres tipos de refrescos
+@
+<<>>=
+Consumo <- sample(Tipo, 20, replace=TRUE); Consumo
+
+# genera una muestra de tamano 20 obtenida de los elementos del vector
+# Tipo y los elementos se seleccionan con reemplazamiento.
+
+# Suponiendo que se quiere editar o agregar datos 
+@
+<<>>=
+data.entry(Consumo) 
+@
+
+\item Guarde el vector en un archivo de datos
+<<>>=
+# Guardar los datos en su directorio de trabajo 
+write(Consumo, "Consumo.txt") 
+@
+
+\item Eliminar los objetos que existen en el espacio de trabajo (Workspace)
+<<>>=
+ls() 
+rm(list=ls(all=TRUE)) 
+ls()
+@
+
+\item Leer o recuperar el vector de datos o archivo de texto 
+<<>>=
+Consumo <- scan("Consumo.txt", what= character(), na.strings = "NA", 
+flush=FALSE);Consumo 
+ls() 
+# Si el vector contiene caracteresse ocupa: what = character() 
+# na.strings ="NA", le indica a R que los valores faltantes son identificados
+# con "NA" 
+@
+
+\item  Crear la tabla de distribuci\'on de frecuencias y proporciones
+<<>>=
+frec <- table(Consumo); frec 
+prop <- table(Consumo)/length(Consumo); prop 
+# Note que la salida por defecto no es para nada atractiva en comparacion con 
+# el resto de paquetes estadisticos 
+@
+<<>>=
+# En cambio, si estamos usando LATEX y queremos incorporar estos cuadros o
+# cualquier otro podemos utilizar el comando xtable(table(Consumo)) (NOTE 
+# QUE EL ARGUMENTO DEBE SER UN CUADRO), y con esto automaticamente se nos 
+# genera el codigo en LATEX y luego incorporarlo a nuestro informe, lo mejor
+# de todo es que salida resultante es mucho mas presentable. 
+@
+
+\item  Conocer un resumen de los datos 
+<<>>=
+summary(Consumo) 
+# note que por tratarse de variables cualitativas unicamente muestra el 
+# numero de elementos, y el tipo de datos. 
+@
+
+\item Realizar un gr\'afico de barras
+<<>>=
+# Para las frecuencias absolutas 
+barplot(frec, main="Grafico de barras", 
+        xlab="Consumo", col=c("yellow", "white", "red"), 
+        sub="Agosto-2012") 
+# Para las frecuencias relativas 
+barplot(prop, main="Grafico de barras", xlab=" Consumo\n", 
+        col=c("yellow","white", "red"), 
+        sub="Agosto-2012") 
+@
+
+\item Realizar un gr\'afico de pastel 
+<<>>=
+pie(frec, main="Gráfico de pastel", xlab="Tipo de Consumo", 
+    col=c("yellow", "white", "cyan"), sub="Agosto-2012") 
+@
+<<>>=
+# Se puede especificar nombres para las categorias y el color de los sectores
+
+names(frec) = c("Coca Cola", "Pepsi", "Salva Cola") 
+pie(frec, main="Gráfico de pastel", xlab=" Consumo", radius=0.8, 
+    col=c("red", "gray", "cyan"), sub="Agosto-2012")
+
+# Los colores se asignas dependiendo del orden en que han sido especificados 
+# por names()
+
+# Note con la instrucción radius se especifica el tamaño de la figura, mientras
+# mas cerca de uno (uno de menos uno) se encuentre más grande será (el ángulo
+# cambia). 
+@
+
+\item Colocar valores num\'ericos en los sectores del gr\'afico
+<<>>=
+n <- length(frec) 
+hoja <- data.frame(frec); hoja 
+etiq <- c(paste(hoja$Var1, "-", hoja$Freq)); etiq 
+pie(frec, main="Gráfico de pastel", labels=etiq, col=rainbow(n), border=TRUE)
+@
+\end{enumerate}
+\end{document}

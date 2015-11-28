@@ -1,0 +1,106 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD SEIS"}}\\
+{\large  \textbf{Pr\'actica 25 - Dise\~nos por bloques }}\\[3 cm]
+{\large Alumna:}\\
+{\large Martha Yoana Medina S\'anchez}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{UNIDAD SEIS}
+\chead{PR\'ACTICA 25}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+Una variable o factor cuyo efecto sobre la variable respuesta no es directamente de inter\'es, pero que se introduce en el experimento para obtener comparaciones m\'as homog\'eneas, se denomina una variable bloque. La diferencia principal entre un factor cualquiera y una variable bloque es que, en general, se supone que no hay interacci\'on entre la variable bloque y la variable factor. En resumen, la variable bloque se introduce para eliminar de manera sistem\'atica las comparaciones estad\'isticas entre los tratamientos (la variable bloque se introduce con el fin de reducir la variabilidad experimental).\\
+
+Supondremos que tenemos una variable factor con k niveles, o mejor dicho tenemos k tratamientos; mientras que tenemos una variable bloque con nniveles, o si lo prefiere n bloques. Supondremos que tomamos una observaci\'on para cada combinaci\'on de tratamiento-bloques (se supone que los tratamientos son asignados de manera aleatoria dentro de cada uno de los bloques).\\
+
+El modelo (basado en los resultados para un \'unico factor) que genera los datos es el siguiente:\\
+
+$y_\ij$ = $\μ$ + $τ_i$ + $B_j$ + $ε_\ij$\\
+
+Donde:
+\begin{itemize}
+  \item $y_\ij$: Representa la observaci\'on en el j-\'esimo bloque del i-\'esimo tratamiento.
+  \item $\μ$: Representa un promedio o efecto global.
+  \item $τ_i$: Representa el efecto del i-\'esimo tratamiento. Debe cumplirse sumatoria de $τ_i$ = 0.
+  \item $B_j$: Representa el efecto del j-\'esimo bloque. Deben cumplir sumatoria de $B_j$ = 0.
+  \item $ε_\ij$: Representa un componente de error aleatorio, llamado perturbaciones, que incorpora todas las dem\'as fuentes de variabilidad del experimento (no incluidas ni en los tratamientos ni en los bloque). 
+\end{itemize}
+
+Las cuatro hip\'otesis b\'asicas del modelo se resumen en $u_\ij$ = $NIID$ N(0; $sigma^2$) =; para todo i,j.\\
+
+La hip\'otesis a probar es como siempre:\\
+$H_o$: $\μ_1$ = $\μ_2$ = $\μ_3$ ... $\μ_k$\\
+$H_1$: $\μ_i$ distinto $\μ_j$; para al menos un par $i$ distinto de $j$\\
+
+Que en t\'erminos de efectos de grupos son:\\
+$H_o$: $τ_1$ = $τ_2$ ... $τ_k$ = 0\\
+$H_1$: $τ_i$ distinto 0; para al menos un $i$\\
+
+No resulta dif\'icil verificar utilizando el m\'etodo de m\'axima verosimilitud que el modelo estimado para una muestra aleatoria de tama\~no $N = kn$ es:\\
+
+$\^y_\ij$ = $\^\μ$ + $\^τ_i$ + $\^B_\j$\\
+
+Y por consiguiente:\\
+
+$y_\ij$ = $\^\μ$ + $\^τ_i$ + $\^B_\j$ + $\^u_\ij$\\
+
+Donde: 
+\begin{itemize}
+  \item $\^\μ$ = $\~y\ ..$
+  \item $\^τ_i$ = $\~y\ i.$ - $\~y\ ..$
+  \item $\^B_\j$ = $\~y\ .j$ - $\~y\ ..$
+  \item $\^u_\ij$ = $y\ ij$ - $\~y\ .j$ - $\~y\ i.$ + $\~y\ ..$
+\end{itemize}
+
+
+
+\end{document}

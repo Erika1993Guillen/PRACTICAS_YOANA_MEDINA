@@ -1,0 +1,377 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD UNO"}}\\
+{\large  \textbf{PR\'ACTICA 04 - Tipos de objetos: factores, listas y hojas de datos, operadores y funciones que operan sobre ellos.}\\[3 cm]
+{\large Alumna:}\\
+{\large Martha Yoana Medina S\'anchez}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{UNIDAD UNO}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\begin{center}
+\textbf{Práctica 03 - Tipos de objetos: factores, listas y hojas de datos, operadores y funciones que operan sobre ellos.}
+\end{center}
+
+\begin{center}
+\textbf{1.  FACTORES NOMINALES Y ORDINALES.}
+\end{center}
+
+\textbf{FACTORES NOMINALES.}\\
+
+Ejemplo 1: Variables sexo (categ\'orica) y edad en una muestra de 7 alumnos del curso. 
+<<>>=
+# Supongamos que se obtuvieron los siguientes datos: 
+sexo <- c("M", "F", "F", "M", "F", "F", "M"); sexo 
+edad <- c(19, 20, 19, 22, 20, 21, 19); edad 
+@
+<<>>=
+# Podemos construir un factor con los niveles o categorias de sexo 
+FactorSexo = factor(sexo); FactorSexo 
+@
+<<>>=
+# Se pueden ver los niveles o categoríasdel factor con: 
+levels(FactorSexo)
+@
+<<>>=
+# Crear una tabla que contenga la media muestralpor categoría de sexo 
+#(nivel del factor):
+
+mediaEdad <- tapply(edad, FactorSexo, mean); mediaEdad
+
+# Note que el primer argumento debe ser un vector, que es del cual se 
+#encontrarán las medidas de resumen; el segundo es el factor que se est\'a
+#considerando, mientras que en el tercero se especifica la medida de
+# inter\'es, solamente puede hacerse una medida a la vez. 
+@
+
+\¿Qu\'e tipo de objeto es la variable mediaEdad?: 
+<<>>=
+is.vector(mediaEdad);
+is.matrix(mediaEdad); 
+is.list(mediaEdad); 
+is.table(mediaEdad); 
+is.array(mediaEdad)
+@
+
+\begin{center}
+\textbf{FACTORES ORDINALES}
+\end{center}
+
+Los niveles de los factores se almacenan en orden alfab\'etico, o en el orden en que se especificaron en la funci\'on factor() si ello se hizo expl\'icitamente. 
+<<>>=
+factor(2)
+@
+
+A veces existe una ordenacion natural en los niveles de un factor, orden que deseamos tener en cuenta en los analisis estadísticos. La funci\'on ordered() crea este tipo de factores y su uso es id\'entico al de la funci\'on factor(). Los factores creados por la funci\'on factor() los denominaremos nominales o simplemente factores cuando no haya lugar a confusi\'on, y los creados por la funci\'on ordered() los denominaremos ordinales. En la mayor\'ia de los casos la \'unica diferencia entre ambos tipos de factores consiste en que los ordinales se imprimenindicando el orden de los niveles. Sin embargo, los contrastes generados por los dos tipos de factores al ajustar Modelos lineales, son diferentes. 
+<<>>=
+ordered(2)
+@
+
+\begin{center}
+\textbf{2.  CREACI\'ON Y MANEJO DE LISTAS.}
+\end{center}
+
+Ejemplo 1: Crear una Lista con cuatro componentes. 
+<<>>=
+lista1<-list(padre="Pedro", madre="María", no.hijos=3, edad.hijos=c(4,7,9)) 
+lista1 
+@
+
+#Revise algunos tipos como:
+<<>>=
+is.matrix(lista1); is.vector(lista1$edad.hijos)
+@
+
+Ejemplo 2: Acceso a las componentes de una lista: 
+<<>>=
+lista1[1] 
+#accede a la componente como una lista (con etiqueta y valor)
+@
+<<>>=
+lista1["padre"] 
+#el acceso es igual que con lista1[1] 
+@
+<<>>=
+lista1[[2]] 
+#accede al valor o valores de la componente segunda pero no muestra el nombre de
+#la componente.
+@
+<<>>=
+lista1["madre"] 
+#el acceso es igual que con lista1[[1]]
+@
+
+Ejemplo 3: Acceso a los elementos de la cuarta componente:
+<<>>=
+lista1[[4]][2] 
+#Se indica el elemento a ingresar en el segundo corchete.
+@
+
+Ejemplo 4: Acceso de las componentes de una lista por su nombre:
+<<>>=
+ lista1$"padre" 
+@
+#similar a 
+<<>>=
+lista1["padre"]
+@
+
+Forma general:\\ 
+
+Por ejemplo:
+<<>>=
+lista1$padre 
+@
+equivale a
+<<>>=
+lista1[[1]]
+@
+y
+<<>>=
+lista1$edad.hijos[2]
+@
+equivale a 
+<<>>=
+lista1[[4]][2]
+@
+
+Ejemplo 5: Utilizar el nombre de la componente como \'indice:
+<<>>=
+lista1[["madre"]] 
+@
+#se puede ver que equivale a
+<<>>=
+lista1$padre 
+@
+#Tambi\'en es \'util la forma:
+<<>>=
+x <- "madre"; lista1[x] 
+@
+
+Ejemplo 6: Creaci\'on de una sublista de una lista existente:
+<<>>=
+subLista <- lista1[4]; subLista
+@
+
+Ejemplo 7: Ampliaci\'on de una lista: por ejemplo,la lista lista1 tiene 4\\
+componentes y se le puede agreg\'ar una quinta componente con:\\
+<<>>=
+lista1[5] <- list(sexo.hijos=c("F", "M", "F")); lista1 
+@
+
+Observe que no aparece el nombre del objeto agregado, pero usted puede modificar la estructura de la lista lista1 con:
+<<>>=
+lista1 <- edit(lista1)
+@
+<<>>=
+lista1[5] <- list(sexo.hijos=c("F", "M", "F")); lista1 
+@
+
+\textbf{Nota: Se puede aplicar la funcion data.entry() para modificar la estructura de una lista.}\\
+
+Ejemplo 8: Funciones que devuelven una lista.\\
+
+Las funciones y expresiones de R devuelven un objeto como resultado, por tanto, si deben devolver varios objetos, previsiblemente de diferentes tipos, la forma usual es una lista con nombres. Por ejemplo, la funci\'on eigen() que calcula los autovalores y autovectores de una matriz sim\'etrica.
+
+<<>>=
+eigen(40)
+@
+
+Ejecute las siguientes instrucciones: 
+<<>>=
+S <- matrix(c(3, -sqrt(2), -sqrt(2), 2), nrow=2, ncol=2); S 
+autovS <- eigen(S); autovS
+@
+
+Observe que la funci\'on eigen() retorna una listade dos componentes, donde la
+componente
+<<>>=
+autovS$values
+@
+es el vector de autovalores de S y la componente es la matriz de los 
+<<>>=
+autovS$vectors
+@
+
+correspondientes autovectores. Si quisi\'eramos almacenar s\'olo los autovalores
+de podemos hacer lo siguiente: 
+<<>>=
+evals <- eigen(S)$values; evals 
+@
+
+Ejemplo 9: Crear una matriz dando nombres a las filas y columnas
+<<>>=
+Notas <- matrix(c(2, 5, 7, 6, 8, 2, 4, 9, 10), ncol=3, 
+dimnames=list(c("Matematica","Algebra","Geometria"), 
+c("Juan","Jose","Rene"))); Notas 
+# Los nombres se dan primero para filas y luego para columnas.
+@
+
+\begin{center}
+\textbf{3.  CREACI\'ON Y MANEJO DE HOJAS DE DATOS (DATA FRAME).}
+\end{center}
+
+Una hoja de datos (data frame) es una lista que pertenece a la clase data.frame.
+Un data.frame puede considerarse como una matriz de datos. Hay restricciones en
+las listas que pueden pertenecer a esta clase, en particular: 
+
+\begin{itemize}
+\item Los componentes deben ser vectores (num\'ericos, cadenas de caracteres, o  l\'ogico), factores, matrices num\'ericas, listas u otras hojas de datos.
+\item Las matrices, listas, y hojas de datos contribuyen a la nueva hoja de datos con tantas variables como columnas, elementos o variables posean, respectivamente.
+\item Los vectores num\'ericos y los factores se incluyensin modificar, los vectores no num\'ericos se fuerzan a factores cuyos niveles son los \'unicos valores que aparecen en el vector.
+\item Los vectores que constituyen la hoja de datos deben tener todos la misma longitud, y las matrices deben tener el mismo tama\~no de filas.
+\end{itemize}
+
+Las hojas de datos pueden interpretarse, en muchos sentidos, como matrices cuyas columnas pueden tener diferentes modos y atributos. Pueden imprimirse en forma matricial y se pueden extraer sus filas o columnas mediante la indexaci\'on de matrices. En una hoja de datos cada columna corresponde a una variable y cada fila a un elemento del conjunto de observaciones.\\
+
+Ejemplo 1: Creaci\'on de un data frame teniendo como columnas tres vectores:\\
+
+\textbf{En primer lugar generamos los tres vectores}\\
+
+El primer vector tendr\'a 20 elementos que se obtienen con reemplazamiento de una muestra aleatoria de valores l\'ogicos.
+<<>>=
+log <- sample(c(TRUE, FALSE), size = 20, replace = T); log 
+# Note que puede usar T en lugar de TRUE y F en lugar de FALSE. 
+@
+
+El segundo vector tendr\'a 20 elementos de valores complejos cuya parte real proviene de una distribuci\'on Normal est\'andar y cuya parte imaginaria lo hace de una distribuci\'on Uniforme(0,1)
+<<>>=
+comp <- rnorm(20) + runif(20) * (1i); comp
+@
+
+El tercer vector tendr\'a 20 elementos de una distribuci\'on Normal est\'andar 
+<<>>=
+num <- rnorm(20, mean=0, sd=1); num 
+@
+
+\textbf{Crear un data frame compuesto por los tres vectores anteriores}
+<<>>=
+df1 <- data.frame(log, comp, num); df1
+@
+
+\textbf{Crear un vector de nombres de los tres vectores anteriores}
+<<>>=
+nombres <- c("logico", "complejo", "numerico")
+@
+
+\textbf{Define los nombres de las columnas del data frame asign\'andoles el vector nombres}
+<<>>=
+names(df1) <- nombres; df1
+@
+
+\textbf{Define los nombres de las filas del data frame asign\'andoles un vector de 20 elementos correspondientes a las 20 primeras letras del abecedario}
+<<>>=
+row.names(df1) <- letters[1:20]; df1
+@
+
+Ejemplo 2: Vamos a crear la siguiente hoja de datos que tiene 4 variables o columnas: 
+<<>>=
+edad <- c(18, 21, 45, 54); edad 
+datos <- matrix(c(150, 160, 180, 205, 65, 68, 65, 69), ncol=2, dimnames=list(c(), c("Estatura","Peso"))); datos 
+sexo <- c("F", "M", "M", "M"); sexo 
+hoja1 <- data.frame(Edad=edad, datos, Sexo=sexo); hoja1
+@
+
+Para editar o agregar datos, o componentes utilice:
+<<>>=
+fix(hoja1) 
+@
+
+\textbf{Nota: Puede forzar que una lista, cuyos componentes cumplan las restricciones para ser una hoja de datos, realmente lo sea, mediante la funci\'on as.data.frame()}\\
+
+\begin{center}
+\textbf{ACCESO A LAS COMPONENTE O VARIABLES DE UNA HOJA DE DATOS.}
+\end{center}
+
+Normalmente para acceder a la componente o variable Edad de la hoja de datos se utilizar\'a la expresion
+<<>>=
+hoja1$Edad
+@
+, pero existe una forma m\'as sencilla, consiste en conectar la hoja de datos para que se pueda hacer referencia a sus componentes directamente por su nombre.\\
+
+\textbf{Conexi\'o de listas o hojas de datos.}\\
+
+La funci\'on search() busca y presenta qu\'e hojas de datos, listas o bibliotecas han sido conectadas o desconectadas. Teclee search()
+<<>>=
+search()
+@
+
+La funci\'on attach() es la funci\'on que permite conectar en la trayectoria de b\'usqueda no s\'olo directorios, listas y hojas de datos, sino tambi\'en otros tipos de objetos. Teclee attach(hoja1) y luego search().\\
+
+
+Luego puede acceder a las componentes por su nombre: 
+<<>>=
+hoja1$Edad
+hoja1$Peso 
+hoja1$peso+1;hoja1 
+@
+
+Posteriormente podr\'a desconectar el objeto utilizando la funci\'on detach(), utilizando como argumento el n\'umero de posici\'on o, preferiblemente, su nombre. Teclee detach(hoja1) y compruebe que la hoja de datos ha sido eliminada de la trayectoria de b\'usqueda con search().\\
+
+Pruebe su puede acceder a una componente sólo con su nombre, por ejemplo,
+
+
+\begin{center}
+\textbf{TRABAJO CON HOJAS DE DATOS}
+\end{center}
+
+Una metodolog\'ia de trabajo para tratar diferentes problemas utilizando el mismo directorio de trabajo es la siguiente:\\
+
+\begin{itemize}
+\item Re\'una todas las variables de un mismo problema en una hoja de datos y d\'e le un nombre apropiado e informativo;
+\item Para analizar un problema, conecte, mediante attach(), la hoja de datos correspondiente (en la posici\'on 2) y utilice el directorio de trabajo (en la posici\'on 1) para los c\'alculos y variables temporales; 
+\item Antes de terminar un an\'alisis, a\~nada las variables que deba conservar a la hoja de datos utilizando la forma \$ para la asignaci\'on y desconecte la hoja de datos mediante detach();
+\item Para finalizar, elimine del directorio de trabajo las variables que no desee conservar, para mantenerlo lo m\'as limpio posible. 
+\end{itemize}
+
+De este modo podr\'a analizar diferentes problemas utilizando el mismo directorio, aunque todos ellos compartan variables denominadas x, y o z, por ejemplo. 
+\end{document}

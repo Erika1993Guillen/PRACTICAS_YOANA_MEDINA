@@ -1,0 +1,133 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD DOS"}}\\
+{\large  \textbf{Pr\'actica 12 - Recodificaci\'on y C\'alculo de nuevas variables. }}\\[3 cm]
+{\large Alumna:}\\
+{\large Martha Yoana Medina S\'anchez}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{UNIDAD DOS}
+\chead{PR\'ACTICA 12}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\begin{center}
+\subsubsection*{Pr\'actica 12- Recodificaci\'on y C\'alculo de nuevas variables.}
+\subsection*{1.  RECODIFICACI\'ON DE VARIABLES.}
+\end{center}
+
+Recodificar una variable consiste en construir una nueva variable mediante la transformaci\'on de los valores de una variable ya existente en el conjunto de datos que se est\'a analizando. La recodificaci\'on es, en muchos casos, la base de todo el an\'alisis estad\'istico pues de \'esta depende una correcta interpretaci\'on de la informaci\'on disponible. En ciertas ocasiones, no basta la informaci\'on tal y como la recolectamos o nos la proporcionaron; pues necesitamos realizar ciertas comparaciones, y para poder hacerlas necesitamos crear una nueva variable (recodificar las variables yaexistentes); si bien es cierto estas nuevas variables no tienen la misma informaci\'on que las variables originales, si nos permiten realizar una an\'alisis mucho m\'as elegante y valioso del conjunto de datos.\\
+
+Para poder ilustrar como realizar una recodificaci\'on, se utilizar\'a la informaci\'on disponible en el archivo "Densidad$_$poblacional.xls"; el cual contiene la poblaci\'on total (desagregada tambi\'en a nivel de g\'enero) y la extensi\'on territorial de cada uno de los municipios del pa\'is. ESTE ARCHIVO SE ENCUENTRA DISPONIBLE EN EL SERVIDO DE DIGESTYC, Y HA SIDO MODIFCADO \'UNICAMENTE PARA FINES DID\'ACTICOS.\\
+
+En la primera columna del archivo,se encuentra un n\'umero que sirve \'unicamente para identificar a los municipios. Los municipios est\'an ordenados por departamento, empezando por los de Ahuachap\'an y terminando con los de La Uni\'on (los primeros 12 datos corresponden al departamento de Ahuachap\'an, los siguientes 13 al departamento de Santa Ana, etc).\\
+
+Lo que deseamos es crear una nueva variable Departamento, con la cual se identifique el departamento, a partir de esta primera columna, teniendo en cuenta \'unicamente el n\'umero de municipios en cada municipio, y el orden en el cual se encuentra en los datos. El procedimiento, podr\'ia ser:\\
+
+\begin{enumerate}
+\item   Activa tu directorio de trabajo 
+<<>>=
+getwd() 
+setwd("C:/Users/User/Documents/PRACTICAS_YOANA_MEDINA/Yoana/PRACTICAS DE R") 
+@
+
+\item  Crea un nuevo script y ll\'amale "Script12-Recodificacion"
+
+\item Recupera desde el archivo la hoja de datos.
+
+Cargar el paquete con la siguiente instrucci\'on:
+<<>>=
+library(RODBC) 
+@
+
+Seleccionar el archivo "Densidad$_$poblacional.xls", con la instrucci\'on:
+<<>>=
+Datos.xls <- odbcConnectExcel(file.choose())
+@
+
+
+
+
+
+ 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+\end{enumerate}
+
+
+
+
+
+
+\end{document}
